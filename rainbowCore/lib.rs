@@ -115,6 +115,8 @@ mod rainbow_core {
         pub fn add_privilege(&mut self, name: String) {
             self.contract_instance.privilege_manage.as_mut().unwrap().add_privilege(name);
         }
+
+        
         //route -> add_route
         #[ink(message)]
         pub fn add_route(&mut self, name: String,value: String) {

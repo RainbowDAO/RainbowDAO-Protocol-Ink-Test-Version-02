@@ -67,17 +67,21 @@ mod role_manage {
             role_privilege_list.push(privilege);
             true
         }
-        #[ink(message)]
-        pub fn role_privileges_list(&self,index:u64) -> Vec<String> {
-           let v =  self.role_privileges.get(&index).unwrap().clone();
-            v
-        }
+        
         #[ink(message)]
         pub fn add_user_role(&mut self,user:AccountId,role:String) -> bool {
             let user_role_list = self.user_role.entry(user.clone()).or_insert(Vec::new());
             user_role_list.push(role);
             true
         }
+
+        #[ink(message)]
+        pub fn transfer_owner(&mut self , to:AccountId) ->bool {
+            assert!(self.owner == self.env().caller());
+            self.owner = to;
+            true
+        }
+
         #[ink(message)]
         pub fn check_user_role(&self,user:AccountId,role:String) -> bool {
             let list =  self.user_role.get(&user).unwrap().clone();
@@ -88,17 +92,15 @@ mod role_manage {
             }
             false
         }
-        #[ink(message)]
-        pub fn get_user_roles(&self,user:AccountId) -> Vec<String> {
-           let list =  self.user_role.get(&user).unwrap().clone();
-            list
-        }
 
         #[ink(message)]
-        pub fn transfer_owner(&mut self , to:AccountId) ->bool {
-            assert!(self.owner == self.env().caller());
-            self.owner = to;
-            true
+        pub fn role_privileges_list(&self,index:u64) -> Vec<String> {
+           self.role_privileges.get(&index).unwrap().clone()
+        }
+        
+        #[ink(message)]
+        pub fn get_user_roles(&self,user:AccountId) -> Vec<String> {
+           self.user_role.get(&user).unwrap().clone()
         }
 
         fn ensure_from_owner(&self) {
