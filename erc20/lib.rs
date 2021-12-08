@@ -15,7 +15,6 @@ mod erc20 {
 
     };
 
-
     #[ink(storage)]
     #[derive(Default)]
     pub struct Erc20 {
@@ -124,6 +123,12 @@ mod erc20 {
                 decimals:self.decimals,
                 owner:self.owner
             }
+        }
+
+        #[ink(message, payable)]
+        pub fn into_info(&mut self,amount: u64) -> bool {
+            
+            true
         }
 
         #[ink(message)]
