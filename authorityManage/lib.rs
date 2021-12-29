@@ -55,4 +55,21 @@ mod authority_manage {
             assert_eq!(self.env().caller(),self.owner);
         }
     }
+
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+        use ink_lang as ink;
+
+        #[ink::test]
+        fn init_works() {
+            let accounts =
+                ink_env::test::default_accounts::<ink_env::DefaultEnvironment>()
+                    .expect("Cannot get accounts");
+            let mut authority_management = AuthorityManagement::new();
+            authority_management.add_privilege(String::from("test"));
+            assert!(authority_management.query_privilege_by_index(0)== String::from("test"));
+        }
+    }
 }
