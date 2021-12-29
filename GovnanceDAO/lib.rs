@@ -91,7 +91,7 @@ mod govnanceDAO {
                 owner: Self::env().caller(),
                 proposals:StorageHashMap::new(),
                 voting_delay:1,
-                voting_period:259200, //3 days
+                voting_period:259200, //three days
                 proposal_length:0,
                 route_addr,
                 rbd_addr
@@ -141,9 +141,7 @@ mod govnanceDAO {
             let mut proposal:Proposal = self.proposals.get(&index).unwrap().clone();
             assert!(self.state(index) ==  ProposalState::Queued);
             let addr =  self.get_contract_addr(target_name);
-            //todo 调用其他合约
-
-
+            //**
             proposal.executed = true;
             true
 
