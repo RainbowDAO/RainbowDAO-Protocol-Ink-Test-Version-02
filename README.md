@@ -6,7 +6,7 @@ RainbowDAO Protocol Ink! Test Version 02
 
 
 
-# RainbowDAO 
+
 
 ## Multi-chain DAO Infrastructure Service Protocol
 
